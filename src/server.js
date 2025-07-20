@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
 import { getEnvValue } from './utils/getEnvValue.js';
-import flowersRouters from './routes/flowers.js';
+import flowersRouters from './routers/flowers.js';
 import { notFoundHandler } from './middlwares/notFoundHandler.js';
 import { errorHandler } from './middlwares/errorHandler.js';
 // import { getAllFlowers } from './services/flowers.js';
