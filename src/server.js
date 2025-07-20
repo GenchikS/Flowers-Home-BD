@@ -33,8 +33,12 @@ export const startServer = () => {
     }),
   );
 
-  app.get(`/`, (req, res) => {
-    res.json({ massage: 'Get reqeust' });
+  app.get(`/`, async (req, res) => {
+     const flowersProducts = await getAllFlowers();
+    console.log(`flowersProducts`, flowersProducts);
+    res.status(200).json({
+      data: flowersProducts,
+    });
   });
 
   app.get(`/flowers`, async (req, res) => {
