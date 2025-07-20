@@ -11,7 +11,7 @@ try {
       flowersAllProducts,
     });
 } catch (error) {
-    throw createHttpError(500, 'Not Found');
+    throw createHttpError(error, 'Not Found');
 }
 };
 
