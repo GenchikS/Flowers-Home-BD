@@ -8,6 +8,13 @@ import { errorHandler } from './middlwares/errorHandler.js';
 // import { getAllFlowers } from './services/flowers.js';
 
 // 10. Створюємо ф-цію startServer, повідомлення PORT та get-запит
+  //  9. Створюємо змінну PORT
+  // const PORT = 3000;
+
+  // 23. Використання ф-ції getEnvValue для отримання значення PORT
+  const PORT = Number(getEnvValue(`PORT`, `3000`));
+// console.log("PORT", PORT);
+
 export const startServer = () => {
   const app = express();
 
@@ -39,16 +46,13 @@ export const startServer = () => {
     // });
   app.use(`/flowers`, flowersRouters);
 
-
-
   // 13.  Створюємо мідлвари помилок
   // 32. Змінюємо обробку помилок на пакет http-errors (npm install http-errors)
-  // app.use((req, res, next) => {
-  //   res.status(404).json({
-  //     message: 'Route not found',
-  //   });
-  // });
-  app.use('*', notFoundHandler);
+  app.use((req, res, next) => {
+    res.status(404).json({
+      message: 'Route not found',
+    });
+  });
 
   // app.use((err, req, res, next) => {
   //   res.status(500).json({
@@ -59,13 +63,6 @@ export const startServer = () => {
 
   // 34. Змінюємо обробку помилоки 500
   app.use(errorHandler);
-
-  //  9. Створюємо змінну PORT
-  // const PORT = 3000;
-
-  // 23. Використання ф-ції getEnvValue для отримання значення PORT
-  const PORT = Number(getEnvValue(`PORT`, `3000`));
-  // console.log("PORT", PORT);
 
   app.listen(PORT, () => {
     console.log(`Started PORT ${PORT}`);
