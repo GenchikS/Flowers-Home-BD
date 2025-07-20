@@ -20,5 +20,5 @@ export const initMongoDB = async () => {
   }
 };
 
-
+// 24. Попереднє в файлі .env
 // 27. Наступне в файлі index.js

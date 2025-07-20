@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
 import { getEnvValue } from './utils/getEnvValue.js';
+import { getAllFlowers } from './services/flowers.js';
 
 //  9. Створюємо змінну PORT
 // const PORT = 3000;
@@ -36,6 +37,14 @@ export const startServer = () => {
     res.json({ massage: 'Get reqeust' });
   });
 
+  app.get(`/flowers`, async (req, res) => {
+    const flowersProducts = await getAllFlowers();
+    console.log(`flowersProducts`, flowersProducts);
+    res.status(200).json({
+      data: flowersProducts,
+    });
+   });
+
   // 13.  Створюємо мідлвари помилок
   app.use((req, res, next) => {
     res.status(404).json({
@@ -64,3 +73,6 @@ export const startServer = () => {
 
 //  22. Попереднє в файлі utils/getEnvValue.js
 //  24. Наступне в файлі .env
+
+//  30. Попереднє в файлі services/flowers.js
+//  . Наступне в файлі .env

@@ -33,6 +33,9 @@ const bootstrap = async () => {
 bootstrap();
 
 // 9. Наступне в файлі server.js
-// 10. Попереднїє в файлі server.js
 
+// 10. Попереднїє в файлі server.js
 // 12. Наступне в файлі server.js
+
+// 26. Попереднїє в файлі db/initMongoDB.js
+// 28. Наступне в файлі db/models/flower.js
