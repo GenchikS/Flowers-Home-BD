@@ -6,7 +6,7 @@ try {
     console.log(`flowersProducts`, flowersAllProducts);
     res.status(200).json({
       message: 'Successfull find flowers',
-      data: flowersAllProducts,
+      flowersAllProducts,
     });
 } catch (error) {
     res.stasus(500).json({
