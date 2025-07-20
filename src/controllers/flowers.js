@@ -2,11 +2,12 @@ import { getAllFlowers } from "../services/flowers.js";
 
 export const getFlowersController = async(req, res) => {
 try {
-  const flowersAllProducts = await getAllFlowers();
+    //   const flowersAllProducts = await getAllFlowers();
+    const flowersAllProducts = "Hello";
     console.log(`flowersProducts`, flowersAllProducts);
     res.status(200).json({
       message: 'Successfull find flowers',
-      flowersAllProducts,
+      data: flowersAllProducts,
     });
 } catch (error) {
     res.stasus(500).json({
