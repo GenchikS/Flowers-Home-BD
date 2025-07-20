@@ -4,13 +4,6 @@ import pino from 'pino-http';
 import { getEnvValue } from './utils/getEnvValue.js';
 import { getAllFlowers } from './services/flowers.js';
 
-//  9. Створюємо змінну PORT
-// const PORT = 3000;
-
-// 23. Використання ф-ції getEnvValue для отримання значення PORT
-const PORT = Number(getEnvValue(`PORT`, `3000`, `5173`));
-// console.log("PORT", PORT);
-
 // 10. Створюємо ф-цію startServer, повідомлення PORT та get-запит
 export const startServer = () => {
   const app = express();
@@ -33,17 +26,17 @@ export const startServer = () => {
     }),
   );
 
-  app.get(`/`, (req, res) => {
-    res.json({ massage: 'Get Home' });
-  });
+  // app.get(`/`, (req, res) => {
+  //   res.json({ massage: 'Get Home' });
+  // });
 
-  app.get(`/flowers`, async (req, res) => {
+  app.use(`/flowers`, async (req, res) => {
     const flowersProducts = await getAllFlowers();
     console.log(`flowersProducts`, flowersProducts);
     res.status(200).json({
       data: flowersProducts,
     });
-   });
+  });
 
   // 13.  Створюємо мідлвари помилок
   app.use((req, res, next) => {
@@ -58,6 +51,13 @@ export const startServer = () => {
       error: err.message,
     });
   });
+
+  //  9. Створюємо змінну PORT
+  // const PORT = 3000;
+
+  // 23. Використання ф-ції getEnvValue для отримання значення PORT
+  const PORT = Number(getEnvValue(`PORT`, `3000`));
+  // console.log("PORT", PORT);
 
   app.listen(PORT, () => {
     console.log(`Started PORT ${PORT}`);
