@@ -19,6 +19,10 @@ const flowerSchema = new Schema(
       type: String,
       required: true,
     },
+    photo: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

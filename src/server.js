@@ -8,7 +8,7 @@ import { getAllFlowers } from './services/flowers.js';
 // const PORT = 3000;
 
 // 23. Використання ф-ції getEnvValue для отримання значення PORT
-const PORT = Number(getEnvValue(`PORT`, `3000`));
+const PORT = Number(getEnvValue(`PORT`, `3000`, `5173`));
 // console.log("PORT", PORT);
 
 // 10. Створюємо ф-цію startServer, повідомлення PORT та get-запит
