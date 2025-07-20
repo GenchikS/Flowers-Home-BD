@@ -2,7 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
 import { getEnvValue } from './utils/getEnvValue.js';
-import { getAllFlowers } from './services/flowers.js';
+import flowersRouters from './routes/flowers.js';
+// import { getAllFlowers } from './services/flowers.js';
 
 // 10. Створюємо ф-цію startServer, повідомлення PORT та get-запит
 export const startServer = () => {
@@ -29,28 +30,22 @@ export const startServer = () => {
   // app.get(`/`, (req, res) => {
   //   res.json({ massage: 'Get Home' });
   // });
+  app.use(`/flowers`, flowersRouters);
 
-  app.use(`/flowers`, async (req, res) => {
-    const flowersProducts = await getAllFlowers();
-    console.log(`flowersProducts`, flowersProducts);
-    res.status(200).json({
-      data: flowersProducts,
-    });
-  });
-
-  // 13.  Створюємо мідлвари помилок
+   // 13.  Створюємо мідлвари помилок
   app.use((req, res, next) => {
     res.status(404).json({
       message: 'Route not found',
     });
   });
 
-  app.use((err, req, res, next) => {
-    res.status(500).json({
-      message: 'Something went wrong',
-      error: err.message,
-    });
-  });
+  // переносимо до controllers
+  // app.use((err, req, res, next) => {
+  //   res.status(500).json({
+  //     message: 'Something went wrong',
+  //     error: err.message,
+  //   });
+  // });
 
   //  9. Створюємо змінну PORT
   // const PORT = 3000;
