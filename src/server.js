@@ -3,6 +3,8 @@ import cors from 'cors';
 import pino from 'pino-http';
 import { getEnvValue } from './utils/getEnvValue.js';
 import flowersRouters from './routes/flowers.js';
+import { notFoundHandler } from './middlwares/notFoundHandler.js';
+import { errorHandler } from './middlwares/errorHandler.js';
 // import { getAllFlowers } from './services/flowers.js';
 
 // 10. Створюємо ф-цію startServer, повідомлення PORT та get-запит
@@ -27,25 +29,36 @@ export const startServer = () => {
     }),
   );
 
-  // app.get(`/`, (req, res) => {
-  //   res.json({ massage: 'Get Home' });
-  // });
+  //  36. Видаляємо звичайний запит та створюємо роут для маршруту /flowers
+    // app.use(`/flowers`, async (req, res) => {
+    //   const flowersProducts = await getAllFlowers();
+    //   console.log(`flowersProducts`, flowersProducts);
+    //   res.status(200).json({
+    //     data: flowersProducts,
+    //   });
+    // });
   app.use(`/flowers`, flowersRouters);
 
-   // 13.  Створюємо мідлвари помилок
-  app.use((req, res, next) => {
-    res.status(404).json({
-      message: 'Route not found',
-    });
-  });
 
-  // переносимо до controllers
+
+  // 13.  Створюємо мідлвари помилок
+  // 32. Змінюємо обробку помилок на пакет http-errors (npm install http-errors)
+  // app.use((req, res, next) => {
+  //   res.status(404).json({
+  //     message: 'Route not found',
+  //   });
+  // });
+  app.use('*', notFoundHandler);
+
   // app.use((err, req, res, next) => {
   //   res.status(500).json({
   //     message: 'Something went wrong',
   //     error: err.message,
   //   });
   // });
+
+  // 34. Змінюємо обробку помилоки 500
+  app.use(errorHandler);
 
   //  9. Створюємо змінну PORT
   // const PORT = 3000;
@@ -70,4 +83,14 @@ export const startServer = () => {
 //  24. Наступне в файлі .env
 
 //  30. Попереднє в файлі services/flowers.js
-//  . Наступне в файлі .env
+//  33. Наступне в файлі middlwares/notFoundHandler.js
+
+//  33. Попереднє в файлі middlwares/notFoundHandler.js
+//  35. Наступне в файлі middlwares/errorHandler.js
+
+
+
+//  35. Попереднє в файлі middlwares/errorHandler.js
+//  37. Наступне в файлі routers/flowers.js
+
+//  39. Створення на frontend redux та діставання масиву
