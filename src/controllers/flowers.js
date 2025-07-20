@@ -1,3 +1,4 @@
+import { errorHandler } from "../middlwares/errorHandler.js";
 import { getAllFlowers } from "../services/flowers.js";
 
 // 38. Створення контролеру getFlowersController
@@ -10,11 +11,7 @@ try {
       flowersAllProducts,
     });
 } catch (error) {
-    res.stasus(500).json({
-    status: 500,
-    message: 'Something went wrong',
-    error: error.message,
-});
+  errorHandler;
 }
 };
 

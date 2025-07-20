@@ -3,8 +3,9 @@ import cors from 'cors';
 import pino from 'pino-http';
 import { getEnvValue } from './utils/getEnvValue.js';
 import flowersRouters from './routers/flowers.js';
-import { notFoundHandler } from './middlwares/notFoundHandler.js';
+// import { notFoundHandler } from './middlwares/notFoundHandler.js';
 import { errorHandler } from './middlwares/errorHandler.js';
+import { notFoundHandler } from './middlwares/notFoundHandler.js';
 // import { getAllFlowers } from './services/flowers.js';
 
 // 10. Створюємо ф-цію startServer, повідомлення PORT та get-запит
@@ -48,11 +49,13 @@ export const startServer = () => {
 
   // 13.  Створюємо мідлвари помилок
   // 32. Змінюємо обробку помилок на пакет http-errors (npm install http-errors)
-  app.use((req, res, next) => {
-    res.status(404).json({
-      message: 'Route not found',
-    });
-  });
+  // app.use((req, res, next) => {
+  //   res.status(404).json({
+  //     message: 'Route not found',
+  //   });
+  // });
+  app.use(notFoundHandler);
+
 
   // app.use((err, req, res, next) => {
   //   res.status(500).json({
