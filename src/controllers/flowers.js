@@ -1,4 +1,3 @@
-import createHttpError from "http-errors";
 import { getAllFlowers } from "../services/flowers.js";
 
 // 38. Створення контролеру getFlowersController
@@ -11,9 +10,13 @@ try {
       flowersAllProducts,
     });
 } catch (error) {
-    throw createHttpError(error, 'Not Found');
+    res.stasus(500).json({
+    status: 500,
+    message: 'Something went wrong',
+    error: error.message,
+});
 }
 };
 
 // 36. Попереднє в файлі routers/flowers.js
-// 39. Наступне в файлі server.js
+// 39. Наступне в файлі controllers/flowers.js
