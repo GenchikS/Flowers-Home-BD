@@ -1,5 +1,5 @@
 import { errorHandler } from "../middlwares/errorHandler.js";
-import { getAllFlowers } from "../services/flowers.js";
+import { createFlower, getAllFlowers } from "../services/flowers.js";
 
 // 38. Створення контролеру getFlowersController
 export const getFlowersController = async(req, res) => {
@@ -16,3 +16,12 @@ try {
 
 // 36. Попереднє в файлі routers/flowers.js
 // 39. Наступне в файлі controllers/flowers.js
+
+export const createFlowerController = async (req, res) => {
+  const addFlower = await createFlower(req.body);
+  res.status(201).json({
+    status: 201,
+    message: 'Successfully created a flower!',
+    data: addFlower
+  });
+};

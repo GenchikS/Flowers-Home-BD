@@ -45,7 +45,7 @@ export const startServer = () => {
     //     data: flowersProducts,
     //   });
     // });
-  app.use(`/flowers`, flowersRouters);
+  app.use(flowersRouters);
 
   // 13.  Створюємо мідлвари помилок
   // 32. Змінюємо обробку помилок на пакет http-errors (npm install http-errors)
@@ -94,3 +94,10 @@ export const startServer = () => {
 //  37. Наступне в файлі routers/flowers.js
 
 //  39. Створення на frontend redux та діставання масиву
+//  40. Створення POST маршруту (додавання до BD) server.js
+
+
+
+
+
+//  40. Додовання фото до BD (npm i multer)
