@@ -7,8 +7,7 @@ try {
   const flowersAllProducts = await getAllFlowers();
     // console.log(`flowersProducts`, flowersAllProducts);
     res.status(200).json({
-      message: 'Successfull find flowers',
-      flowersAllProducts,
+      data: flowersAllProducts,
     });
 } catch (error) {
   errorHandler;
