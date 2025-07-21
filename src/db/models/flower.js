@@ -8,7 +8,7 @@ const flowerSchema = new Schema(
       required: true,
     },
     size: {
-      type: Number,
+      type: String,
       required: true,
     },
     blossom: {
@@ -16,6 +16,10 @@ const flowerSchema = new Schema(
       required: true,
     },
     color: {
+      type: String,
+      required: true,
+    },
+    price: {
       type: String,
       required: true,
     },
