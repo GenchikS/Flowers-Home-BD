@@ -10,3 +10,13 @@ export const createFlower = async (payload) => {
     const addFlower = FlowerCollection.create(payload);
     return addFlower;
 };
+
+export const patchFlower = async (id, photoUrl, body) => {
+  const padchedFlower = FlowerCollection.findOneAndUpdate(
+    { _id: id },
+    { ...body, photo: photoUrl },
+    { new: true },
+  );
+  return padchedFlower;
+};
+

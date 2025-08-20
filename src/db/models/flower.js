@@ -23,9 +23,9 @@ const flowerSchema = new Schema(
       type: String,
       required: true,
     },
+    // 41.9
     photo: {
       type: String,
-      required: true,
     },
   },
   {
@@ -39,3 +39,6 @@ export const FlowerCollection = model(`flower`, flowerSchema);
 
 // 27. Попереднє в файлі index.js
 // 30. Наступне в файлі services/flowers.js
+
+// 41.8 Попереднє в файлі utils/saveFileToUploadDir.js
+// 41.10 Наступне в файлі controllers/flowers.js

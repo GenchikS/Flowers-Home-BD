@@ -17,6 +17,8 @@
 
 import { initMongoDB } from "./db/initMongoDB.js";
 import { startServer } from "./server.js";
+import { createDirIfNotExists } from "./utils/createDirIfNotExists.js";
+import { TEMP_UPLOAD_DIR, UPLOAD_DIR } from './constants/index.js';
 
 // const home = "Hello Flowers";
 // console.log(home);
@@ -27,6 +29,9 @@ import { startServer } from "./server.js";
 // 27. Замість пункту 11, створюємо ф-цію запуску серверу з підключенням до бази
 const bootstrap = async () => {
     await initMongoDB();
+    // 41.4 Додаємо папки тимчасового збереження фото
+      await createDirIfNotExists(TEMP_UPLOAD_DIR);
+      await createDirIfNotExists(UPLOAD_DIR);
     startServer();
 };
 
@@ -39,3 +44,6 @@ bootstrap();
 
 // 26. Попереднїє в файлі db/initMongoDB.js
 // 28. Наступне в файлі db/models/flower.js
+
+// 41.3 Попереднїє в файлі utils/createDirIfNotExist.js
+// 41.5 Наступне в файлі routers/flowers.js

@@ -6,6 +6,7 @@ import flowersRouters from './routers/flowers.js';
 // import { notFoundHandler } from './middlwares/notFoundHandler.js';
 import { errorHandler } from './middlwares/errorHandler.js';
 import { notFoundHandler } from './middlwares/notFoundHandler.js';
+import { UPLOAD_DIR } from './constants/index.js';
 // import { getAllFlowers } from './services/flowers.js';
 
 // 10. Створюємо ф-цію startServer, повідомлення PORT та get-запит
@@ -46,6 +47,8 @@ export const startServer = () => {
     //   });
     // });
   app.use(flowersRouters);
+  // 41.7
+  app.use('/uploads', express.static(UPLOAD_DIR));
 
   // 13.  Створюємо мідлвари помилок
   // 32. Змінюємо обробку помилок на пакет http-errors (npm install http-errors)
@@ -96,8 +99,7 @@ export const startServer = () => {
 //  39. Створення на frontend redux та діставання масиву
 //  40. Створення POST маршруту (додавання до BD) server.js
 
+//  41. Додовання фото до BD (npm i multer, npm i path)
 
-
-
-
-//  40. Додовання фото до BD (npm i multer)
+//  41.6. Попереднє в файлі controllers/flowers.js
+//  41.8 Наступне в файлі utils/saveFileToUploadDir.js
