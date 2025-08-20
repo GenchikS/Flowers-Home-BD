@@ -7,7 +7,7 @@ export function getEnvValue(name, defaultValue) {
   const value = process.env[name];
   if (value) return value;
   if (defaultValue) return defaultValue;
-  throw new Error(`Missing: process.env[${name}]`);
+  // throw new Error(`Missing: process.env[${name}]`);
 }
 
 // 20. Попереднє в файлі .env.example
