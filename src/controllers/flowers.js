@@ -1,4 +1,3 @@
-// import createHttpError from "http-errors";
 import { errorHandler } from "../middlwares/errorHandler.js";
 import {
   createFlower,
@@ -10,14 +9,16 @@ import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 // import * as path from 'node:path';
 import { getEnvValue } from "../utils/getEnvValue.js";
 import createHttpError from "http-errors";
+import { parsePaginationParams } from "../utils/parsePaginatiomParams.js";
 
 
 const enableCloudnary = getEnvValue('ENABLE_CLOUDNARY');
 
 // 38. Створення контролеру getFlowersController
-export const getFlowersController = async(req, res) => {
+export const getFlowersController = async (req, res) => {
+  const { page, perPage } = parsePaginationParams(req.query);
 try {
-  const flowersAllProducts = await getAllFlowers();
+  const flowersAllProducts = await getAllFlowers({page, perPage});
     // console.log(`flowersProducts`, flowersAllProducts);
     res.status(200).json({
       data: flowersAllProducts,
