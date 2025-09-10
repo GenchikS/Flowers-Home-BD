@@ -3,6 +3,7 @@ import {
   createFlower,
   patchFlower,
   getAllFlowers,
+  patchWebFlower,
 } from '../services/flowers.js';
 import { saveFileToUploadDir } from "../utils/saveFileToUploadDir.js";
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
@@ -50,21 +51,18 @@ export const patchFlowerController = async (req, res, next) => {
   const photo = req.file;
   // console.log(`photo`, photo);
 
-
   let photoUrl = null; //  пуста
 
   if (photo) {
     // console.log(`req.file`, req.files);
     if (enableCloudnary === 'true') {
       // console.log(`enableCloudnary`, enableCloudnary);
-      photoUrl = await saveFileToCloudinary(photo, 'flowershome');
+      photoUrl = await saveFileToCloudinary(photo, 'flowershome/photo');
     } else {
       photoUrl = await saveFileToUploadDir(req.file); //  якщо приходить файл, то передаємо для переміщення
       // photoUrl = path.join('uploads', req.file.filename); //  передаємо відносний шлях в корінь проєкту в папку uploads (на випадок зміни шляху). Папку uploads не вказувати
     }
-
-
-  }
+}
 
   // const body = req.body;
   // console.log(`body`, body);
@@ -81,6 +79,44 @@ export const patchFlowerController = async (req, res, next) => {
     data: data,
   });
 };
+
+export const patchFlowerWebController = async (req, res, next) => {
+  const { id } = req.params;
+  // console.log(`id`, id);
+
+  // const userId = req.user.userId;
+  const photoWeb = req.file;
+  // console.log(`photo`, photo);
+
+  let photoWebUrl = null; //  пуста
+
+  if (photoWeb) {
+    // console.log(`req.file`, req.files);
+    if (enableCloudnary === 'true') {
+      // console.log(`enableCloudnary`, enableCloudnary);
+      photoWebUrl = await saveFileToCloudinary(photoWeb, 'flowershome/photoWeb');
+    } else {
+      photoWebUrl = await saveFileToUploadDir(req.file); //  якщо приходить файл, то передаємо для переміщення
+      // photoUrl = path.join('uploads', req.file.filename); //  передаємо відносний шлях в корінь проєкту в папку uploads (на випадок зміни шляху). Папку uploads не вказувати
+    }
+  }
+
+  // const body = req.body;
+  // console.log(`body`, body);
+  const data = await patchWebFlower(id, photoWebUrl, { ...req.body });
+  // console.log(`data`, data);
+  // console.log(`photo`, photo);
+
+  if (!data) {
+    throw createHttpError(404, `Not found`);
+  }
+  res.json({
+    status: 200,
+    message: `Successfully patched a flower!`,
+    data: data,
+  });
+};
+
 
 
 

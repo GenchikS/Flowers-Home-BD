@@ -31,8 +31,16 @@ export const patchFlower = async (id, photoUrl, body) => {
   const padchedFlower = FlowerCollection.findOneAndUpdate(
     { _id: id },
     { ...body, photo: photoUrl },
-    { new: true },
+  { new: true },
   );
   return padchedFlower;
 };
 
+export const patchWebFlower = async (id, photoWebUrl, body) => {
+  const padchedFlower = FlowerCollection.findOneAndUpdate(
+    { _id: id },
+    { ...body, photoWeb: photoWebUrl },
+    { new: true },
+  );
+  return padchedFlower;
+};

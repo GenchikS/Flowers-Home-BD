@@ -12,9 +12,15 @@ flowersRouters.post('/flower', ctrlWrapper(flowersControllers.createFlowerContro
 
 // 41.5 Додавання до завантаження масиву фото (до 3 шт) (upload.array('photos', 10))
 flowersRouters.patch(
-  '/:id',
+  '/photo/:id',
   upload.single('photo'),
   ctrlWrapper(flowersControllers.patchFlowerController),
+);
+
+flowersRouters.patch(
+  '/photoWeb/:id',
+  upload.single('photoWeb'),
+  ctrlWrapper(flowersControllers.patchFlowerWebController),
 );
 
 export default flowersRouters;
