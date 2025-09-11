@@ -27,7 +27,7 @@ export const parsePaginationParams = (query) => {
 
   const parsedPage = parseNumber(page, 1);
   const parsedPerPage = parseNumber(perPage, 2);
-  const parsedColor = parseString(color, `всі`);
+  const parsedColor = parseString(color);
 
     return {
       page: parsedPage,
