@@ -9,7 +9,7 @@ export const getAllFlowers = async ({ page, perPage, color }) => {
   // console.log('colorSource', colorSource);
 
   const flowersQuery =
-    colorSource === `all`|| {}
+    colorSource === `всі` || !colorSource
       ? FlowerCollection.find()
       : FlowerCollection.find({
           color: { $eq: colorSource },
