@@ -8,7 +8,9 @@ export const getAllFlowers = async ({ page, perPage, color }) => {
   const colorSource = color;
   // console.log('colorSource', colorSource);
 
-  const flowersQuery = FlowerCollection.find({ color: { $eq: colorSource } });
+  const flowersQuery = colorSource ? FlowerCollection.find({
+    color: { $eq: colorSource },
+  }) : FlowerCollection.find();
 
   const flowersCount = await FlowerCollection.find().merge(flowersQuery).countDocuments();
 
