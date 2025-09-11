@@ -17,9 +17,9 @@ const enableCloudnary = getEnvValue('ENABLE_CLOUDNARY');
 
 // 38. Створення контролеру getFlowersController
 export const getFlowersController = async (req, res) => {
-  const { page, perPage } = parsePaginationParams(req.query);
+  const { page, perPage, color } = parsePaginationParams(req.query);
 try {
-  const flowersAllProducts = await getAllFlowers({page, perPage});
+  const flowersAllProducts = await getAllFlowers({ page, perPage, color });
     // console.log(`flowersProducts`, flowersAllProducts);
     res.status(200).json({
       data: flowersAllProducts,

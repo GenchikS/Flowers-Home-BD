@@ -2,14 +2,19 @@ import { FlowerCollection } from "../db/models/flower.js";
 import { calculatePaginationData } from "../utils/calculatePaginationData.js";
 
 //  30. Створення сервісу для отримання інформації про весть список товарів
-export const getAllFlowers = async ({ page, perPage }) => {
+export const getAllFlowers = async ({ page, perPage, color }) => {
   const limit = perPage;
   const skip = (page - 1) * perPage;
+  const colorSource = color;
+  // console.log('colorSource', colorSource);
 
-  const flowersQuery = FlowerCollection.find();
+  const flowersQuery = FlowerCollection.find({ color: { $eq: colorSource } });
+
   const flowersCount = await FlowerCollection.find().merge(flowersQuery).countDocuments();
 
   const flowers = await flowersQuery.skip(skip).limit(limit).exec();
+
+  // console.log('flowers', flowers);
 
   const paginationData = calculatePaginationData(flowersCount, page, perPage);
 
