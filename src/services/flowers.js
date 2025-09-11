@@ -8,10 +8,14 @@ export const getAllFlowers = async ({ page, perPage, color }) => {
   const colorSource = color;
   // console.log('colorSource', colorSource);
 
-  const flowersQuery = colorSource !== `всі` ? FlowerCollection.find({
-    color: { $eq: colorSource },
-  }) : FlowerCollection.find();
+  const flowersQuery =
+    colorSource === `all`|| {}
+      ? FlowerCollection.find()
+      : FlowerCollection.find({
+          color: { $eq: colorSource },
+        });
 
+  console.log('flowersQuery', flowersQuery);
   const flowersCount = await FlowerCollection.find().merge(flowersQuery).countDocuments();
 
   const flowers = await flowersQuery.skip(skip).limit(limit).exec();
