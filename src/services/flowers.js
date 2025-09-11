@@ -8,7 +8,7 @@ export const getAllFlowers = async ({ page, perPage, color }) => {
   const colorSource = color;
   // console.log('colorSource', colorSource);
 
-  const flowersQuery = colorSource ? FlowerCollection.find({
+  const flowersQuery = colorSource !== `всі` ? FlowerCollection.find({
     color: { $eq: colorSource },
   }) : FlowerCollection.find();
 
