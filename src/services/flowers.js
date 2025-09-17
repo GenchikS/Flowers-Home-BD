@@ -35,7 +35,7 @@ const flowersQuery =
         });
 
   // console.log('flowersQuery', flowersQuery);
-  const flowersCount = await ChrysanthemumsCollection.find()
+  const flowersCount = await Collection.find()
     .merge(flowersQuery)
     .countDocuments();
 
