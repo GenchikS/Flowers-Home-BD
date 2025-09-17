@@ -4,26 +4,28 @@ import { ctrlWrapper } from "../utils/ctrlWrapper.js";
 import { upload } from "../middlwares/multer.js";
 
 //  37. Створення роуту
-const flowersRouters = Router();
+const routers = Router();
 
-flowersRouters.get('/', flowersControllers.getFlowersController);
-flowersRouters.post('/flower', ctrlWrapper(flowersControllers.createFlowerController),
+routers.get('/', flowersControllers.getFlowersController);
+routers.post(
+  '/chrysanthemums',
+  ctrlWrapper(flowersControllers.createFlowerController),
 );
 
 // 41.5 Додавання до завантаження масиву фото (до 3 шт) (upload.array('photos', 10))
-flowersRouters.patch(
-  '/photo/:id',
+routers.patch(
+  '/chrysanthemums/photo/:id',
   upload.single('photo'),
   ctrlWrapper(flowersControllers.patchFlowerController),
 );
 
-flowersRouters.patch(
-  '/photoWeb/:id',
+routers.patch(
+  '/chrysanthemums/photoWeb/:id',
   upload.single('photoWeb'),
   ctrlWrapper(flowersControllers.patchFlowerWebController),
 );
 
-export default flowersRouters;
+export default routers;
 
 
 // 36. Попереднє в файлі server.js

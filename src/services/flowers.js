@@ -12,10 +12,10 @@ export const getAllFlowers = async ({ page, perPage, color }) => {
     colorSource === `всі` || !colorSource
       ? FlowerCollection.find()
       : FlowerCollection.find({
-          color: { $eq: colorSource },
-        });
+        color: { $eq: colorSource },
+       });
 
-  console.log('flowersQuery', flowersQuery);
+  // console.log('flowersQuery', flowersQuery);
   const flowersCount = await FlowerCollection.find().merge(flowersQuery).countDocuments();
 
   const flowers = await flowersQuery.skip(skip).limit(limit).exec();

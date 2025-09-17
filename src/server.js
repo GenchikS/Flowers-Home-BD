@@ -2,11 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
 import { getEnvValue } from './utils/getEnvValue.js';
-import flowersRouters from './routers/flowers.js';
+// import flowersRouters from './routers/flowers.js';
 // import { notFoundHandler } from './middlwares/notFoundHandler.js';
 import { errorHandler } from './middlwares/errorHandler.js';
 import { notFoundHandler } from './middlwares/notFoundHandler.js';
 import { UPLOAD_DIR } from './constants/index.js';
+import router from './routers/index.js';
 // import { getAllFlowers } from './services/flowers.js';
 
 // 10. Створюємо ф-цію startServer, повідомлення PORT та get-запит
@@ -46,7 +47,7 @@ export const startServer = () => {
     //     data: flowersProducts,
     //   });
     // });
-  app.use(flowersRouters);
+  app.use(router);
   // 41.7
   app.use('/uploads', express.static(UPLOAD_DIR));
 
