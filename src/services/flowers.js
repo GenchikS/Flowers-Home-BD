@@ -1,4 +1,4 @@
-import { FlowerCollection } from "../db/models/flower.js";
+import { FlowerCollection } from "../db/models/chrysanthemums.js";
 import { calculatePaginationData } from "../utils/calculatePaginationData.js";
 
 //  30. Створення сервісу для отримання інформації про весть список товарів
