@@ -42,8 +42,8 @@ const flowerSchema = new Schema(
 );
 
 // 29. Створення моделі продукту за допомогою Schema
-export const FlowerCollection = model(`chrysanthemums`, flowerSchema);
-// export const FlowerCollection = model(`daisies`, flowerSchema);
+export const ChrysanthemumsCollection = model(`chrysanthemums`, flowerSchema);
+export const DaisieCollection = model(`daisies`, flowerSchema);
 
 // 27. Попереднє в файлі index.js
 // 30. Наступне в файлі services/flowers.js

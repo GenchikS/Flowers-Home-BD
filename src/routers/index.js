@@ -1,6 +1,6 @@
 import { Router } from "express";
 import chrysanthemumsRouter from './flowers.js';
-// import daisiesRouter from './daisies.js';
+import daisiesRouter from './daisies.js';
 
 // import gardensRouter from "./gardens.js";
 // import authRouter from "./auth.js";
@@ -10,7 +10,7 @@ const router = Router();
 
   // Змінна finishingsRouter - це маршрут finishings + Router
 router.use(chrysanthemumsRouter);
-// router.use(daisiesRouter);
+router.use(daisiesRouter);
   // Змінна gardensRouter - це маршрут gardens + Router
 //   router.use(gardensRouter);
 // router.use(authRouter);
