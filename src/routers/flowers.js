@@ -6,7 +6,7 @@ import { upload } from "../middlwares/multer.js";
 //  37. Створення роуту
 const routers = Router();
 
-routers.get('/flowers', flowersControllers.getFlowersController);
+routers.get('/flowers/chrysanthemums', flowersControllers.getFlowersController);
 routers.post(
   '/flowers/chrysanthemums',
   ctrlWrapper(flowersControllers.createFlowerController),
