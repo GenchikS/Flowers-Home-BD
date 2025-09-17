@@ -12,7 +12,7 @@ export const getAllFlowers = async ({ page, perPage, color, titleSource}) => {
 
   let Collection;
 
-  switch (titleSource) {
+  switch (titleSource.toLowerCase()) {
     case 'хризантеми':
       Collection = ChrysanthemumsCollection;
       // console.log('Collection1', Collection);
@@ -20,12 +20,11 @@ export const getAllFlowers = async ({ page, perPage, color, titleSource}) => {
     case 'ромашки':
       Collection = DaisieCollection;
       // console.log('Collection2', Collection);
-
       break;
     default:
       Collection = ChrysanthemumsCollection;
-      // console.log('Collection3', Collection);
-}
+    // console.log('Collection3', Collection);
+  }
 
 const flowersQuery =
     colorSource === `всі` || !colorSource
@@ -40,11 +39,8 @@ const flowersQuery =
     .countDocuments();
 
   const flowers = await flowersQuery.skip(skip).limit(limit).exec();
-
   // console.log('flowers', flowers);
-
   const paginationData = calculatePaginationData(flowersCount, page, perPage);
-
   return {
     data: flowers,
     ...paginationData,
@@ -55,7 +51,24 @@ const flowersQuery =
 // 31. Наступне в файлі server.js
 
 export const createFlower = async (payload) => {
-    const addFlower = ChrysanthemumsCollection.create(payload);
+  // console.log('payload', payload.flower);
+
+  let Collection;
+
+    switch (payload.flower.toLowerCase()) {
+      case 'хризантема':
+        Collection = ChrysanthemumsCollection;
+        // console.log('Collection1', Collection);
+        break;
+      case 'ромашка':
+        Collection = DaisieCollection;
+        // console.log('Collection2', Collection);
+        break;
+      default:
+        Collection = ChrysanthemumsCollection;
+        // console.log('Collection3', Collection);
+    }
+    const addFlower = Collection.create(payload);
     return addFlower;
 };
 
