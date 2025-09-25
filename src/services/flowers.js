@@ -7,9 +7,9 @@ export const getAllFlowers = async ({ page, perPage, color, titleSource, size })
   const skip = (page - 1) * perPage;
   const colorSource = color;
   const flowerSize = size;
-  console.log('flowerSize', flowerSize);
+  // console.log('flowerSize', flowerSize);
   // const titleSourceAll = titleSource;
-  console.log('colorSource', colorSource);
+  // console.log('colorSource', colorSource);
   // console.log('titleSource2', titleSourceAll);
 
   let Collection;
@@ -36,12 +36,12 @@ const flowersQuery =
       });
   // console.log('flowersQuery', flowersQuery);
 
-// const flowersQuerySize =
-//   size === `всі` || !size
-//     ? flowersQuery.find()
-//     : flowersQuery.find({
-//         size: { $eq: size },
-//       });
+const flowersQuerySize =
+  flowerSize === `всі` || !flowerSize
+    ? flowersQuery.find()
+    : flowersQuery.find({
+        size: { $eq: flowerSize },
+      });
 
   // console.log('flowersQuerySize', flowersQuery);
 
@@ -49,7 +49,9 @@ const flowersQuery =
     .merge(flowersQuery)
     .countDocuments();
 
-  const flowers = await flowersQuery.skip(skip).limit(limit).exec();
+  // console.log('flowersCount', flowersCount);
+
+  const flowers = await flowersQuerySize.skip(skip).limit(limit).exec();
   // console.log('flowers', flowers);
   const paginationData = calculatePaginationData(flowersCount, page, perPage);
   return {
