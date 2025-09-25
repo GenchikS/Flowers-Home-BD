@@ -6,7 +6,7 @@ export const getAllFlowers = async ({ page, perPage, color, titleSource, size })
   const limit = perPage;
   const skip = (page - 1) * perPage;
   const colorSource = color;
-  const flowerSize = size || `всі`; // якщо є size, то залишаємо. Якщо немає, то 'всі'
+  // const flowerSize = size || `всі`; // якщо є size, то залишаємо. Якщо немає, то 'всі'
   // console.log('flowerSize', flowerSize);
   // const titleSourceAll = titleSource;
   // console.log('colorSource', colorSource);
@@ -37,10 +37,10 @@ const flowersQuery =
   // console.log('flowersQuery', flowersQuery);
 
 const flowersQuerySize =
-  flowerSize === `всі` || !flowerSize
+  size === `всі` || !size
     ? flowersQuery.find()
     : flowersQuery.find({
-        size: { $eq: flowerSize },
+        size: { $eq: size },
       });
 
   console.log('flowersQuerySize', flowersQuerySize);
