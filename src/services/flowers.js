@@ -2,10 +2,12 @@ import { ChrysanthemumsCollection, DaisieCollection } from '../db/models/chrysan
 import { calculatePaginationData } from "../utils/calculatePaginationData.js";
 
 //  30. Створення сервісу для отримання інформації про весть список товарів
-export const getAllFlowers = async ({ page, perPage, color, titleSource}) => {
+export const getAllFlowers = async ({ page, perPage, color, titleSource, size }) => {
   const limit = perPage;
   const skip = (page - 1) * perPage;
   const colorSource = color;
+  const flowerSize = size || `всі`; // якщо є size, то залишаємо. Якщо немає, то 'всі'
+  // console.log('flowerSize', flowerSize);
   // const titleSourceAll = titleSource;
   // console.log('colorSource', colorSource);
   // console.log('titleSource2', titleSourceAll);
@@ -31,11 +33,20 @@ const flowersQuery =
       ? Collection.find()
       : Collection.find({
           color: { $eq: colorSource },
-        });
-
+      });
   // console.log('flowersQuery', flowersQuery);
+
+const flowersQuerySize =
+  flowerSize === `всі` || !flowerSize
+    ? flowersQuery.find()
+    : flowersQuery.find({
+        size: { $eq: flowerSize },
+      });
+
+  console.log('flowersQuerySize', flowersQuerySize);
+
   const flowersCount = await Collection.find()
-    .merge(flowersQuery)
+    .merge(flowersQuerySize)
     .countDocuments();
 
   const flowers = await flowersQuery.skip(skip).limit(limit).exec();
