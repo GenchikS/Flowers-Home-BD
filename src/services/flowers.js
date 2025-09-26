@@ -1,7 +1,7 @@
 import { ChrysanthemumsCollection, DaisieCollection } from '../db/models/chrysanthemums.js';
 import { calculatePaginationData } from "../utils/calculatePaginationData.js";
 
-//  30. Створення сервісу для отримання інформації про весть список товарів
+//  30. Створення сервісу для отримання інформації про весть
 export const getAllFlowers = async ({ page, perPage, color, titleSource, size }) => {
   const limit = perPage;
   const skip = (page - 1) * perPage;
