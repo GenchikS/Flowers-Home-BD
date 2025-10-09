@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { ctrlWrapper } from "../utils/ctrlWrapper.js";
 
-import { registerUserSchema } from "../validation/register.js";
+import { loginUserSchema, registerUserSchema } from "../validation/register.js";
 import * as userControllers from "../controllers/auth.js";
 import { validateBody } from "../middlwares/validateBody.js";
 
@@ -19,8 +19,8 @@ routers.post(
 );
 
 routers.post(
-  '/register',
-  validateBody(registerUserSchema),
+  '/login',
+  validateBody(loginUserSchema),
   ctrlWrapper(userControllers.createUserController),
 );
 
