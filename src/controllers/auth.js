@@ -2,7 +2,7 @@ import { loginUser, registerUser } from "../services/auth.js";
 
 
 export const createUserController = async (req, res) => {
-    console.log('req.body', req.body);
+    // console.log('req.body', req.body);
     const user = await registerUser(req.body);
     res.status(201).json({
         status: 201,
@@ -13,11 +13,11 @@ export const createUserController = async (req, res) => {
 
 
 export const loginUserController = async (req, res) => {
-  console.log('req.body', req.body);
+//   console.log('req.body', req.body);
   const user = await loginUser(req.body);
   res.status(200).json({
     status: 200,
-    message: 'Succefully register a user',
+    message: 'Login a user',
     data: user,
   });
 };

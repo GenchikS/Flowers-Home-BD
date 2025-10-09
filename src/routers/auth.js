@@ -20,8 +20,8 @@ routers.post(
 
 routers.post(
   '/login',
-  validateBody(loginUserSchema),
-  ctrlWrapper(userControllers.createUserController),
+  // validateBody(loginUserSchema),
+  ctrlWrapper(userControllers.loginUserController),
 );
 
 
