@@ -13,8 +13,9 @@ export const createUserController = async (req, res) => {
 
 
 export const loginUserController = async (req, res) => {
-//   console.log('req.body', req.body);
+  // console.log('req.body', req.body);
   const user = await loginUser(req.body);
+  console.log('user', user);
   res.status(200).json({
     status: 200,
     message: 'Login a user',

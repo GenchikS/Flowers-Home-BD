@@ -14,21 +14,32 @@ export const registerUser = async (payload) => {
 
 export const loginUser = async (payload) => {
 
-    console.log('payload', payload.email);
+  // console.log('payload', payload.email);
 
-    const loginUser = await UserCollection.findOne({email: payload.email});
+  const loginUser = await UserCollection.findOne({ email: payload.email });
   if (!loginUser) {
     throw createHttpError(401, 'User not found');
   }
 
-  console.log('loginUser', loginUser);
+  // console.log('loginUser', loginUser);
+  // console.log('loginUser.password', loginUser.password);
 
-    const isPasssword = await bcrypt.compare(
-      payload.password,
-      loginUser.password,
-    );
-    if (!isPasssword) {
-      throw createHttpError(401, 'Unauthorized');
-    }
-  return loginUser;
+
+  const isPasssword = await bcrypt.compare(
+    payload.password,
+    loginUser.password,
+  );
+  // console.log('payload', payload.password);
+  // console.log('isPasssword', isPasssword);
+  if (!isPasssword) {
+    throw createHttpError(401, 'Unauthorized');
+  }
+
+  return  {
+      _id: loginUser._id,
+      name: loginUser.name,
+      email: loginUser.email,
+      createdAt: loginUser.createdAt,
+      updatedAt: loginUser.updatedAt,
+  };
 };
