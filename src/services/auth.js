@@ -35,11 +35,5 @@ export const loginUser = async (payload) => {
     throw createHttpError(401, 'Unauthorized');
   }
 
-  return  {
-      _id: loginUser._id,
-      name: loginUser.name,
-      email: loginUser.email,
-      createdAt: loginUser.createdAt,
-      updatedAt: loginUser.updatedAt,
-  };
+  return isPasssword;
 };
