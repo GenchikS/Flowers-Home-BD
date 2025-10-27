@@ -8,19 +8,19 @@ const routers = Router();
 
 routers.get('/', flowersControllers.getFlowersController);
 routers.post(
-  '/flowers/chrysanthemums',
+  '/chrysanthemums',
   ctrlWrapper(flowersControllers.createFlowerController),
 );
 
 // 41.5 Додавання до завантаження масиву фото (до 3 шт) (upload.array('photos', 10))
 routers.patch(
-  '/flowers/chrysanthemums/photo/:id',
+  '/chrysanthemums/photo/:id',
   upload.single('photo'),
   ctrlWrapper(flowersControllers.patchFlowerController),
 );
 
 routers.patch(
-  '/flowers/chrysanthemums/photoWeb/:id',
+  '/chrysanthemums/photoWeb/:id',
   upload.single('photoWeb'),
   ctrlWrapper(flowersControllers.patchFlowerWebController),
 );
