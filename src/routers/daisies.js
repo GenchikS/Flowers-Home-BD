@@ -11,7 +11,7 @@ const routers = Router();
 
 routers.get('/', flowersControllers.getFlowersController);
 routers.post(
-  '/flowers/daisies',
+  '/daisies',
   ctrlWrapper(flowersControllers.createFlowerController),
 );
 
