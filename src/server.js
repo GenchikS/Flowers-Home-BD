@@ -9,6 +9,7 @@ import { notFoundHandler } from './middlwares/notFoundHandler.js';
 import { UPLOAD_DIR } from './constants/index.js';
 import router from './routers/index.js';
 // import { getAllFlowers } from './services/flowers.js';
+import cookieParser from 'cookie-parser';
 
 // 10. Створюємо ф-цію startServer, повідомлення PORT та get-запит
   //  9. Створюємо змінну PORT
@@ -27,7 +28,7 @@ export const startServer = () => {
   // 15 Додавання мідлвари CORS. Перевірка та доступи з різних перехресних доменів. Встановлення npm i cors
 
   app.use(cors());
-
+app.use(cookieParser());
   // 16. Створення структури папок в папці src(contacts, controllers, db, midlwares, routes, services, templates, utils, validation, .env(в корнефому файлі!!!) , .env.example(в корнефому файлі!!!))
 
   // 14. Мідлвара логування pino. Встановлення npm install pino-http та npm i --save-dev pino-pretty

@@ -2,6 +2,9 @@ import createHttpError from 'http-errors';
 import { UserCollection } from '../db/models/user.js';
 // npm i bcrypt хешування пароля
 import bcrypt from 'bcrypt';
+import { randomBytes } from 'crypto';
+import { SessionsCollection } from '../db/models/session.js';
+import { FIFTEEN_MINUTES, ONE_DAY } from '../constants/index.js';
 
 export const registerUser = async (payload) => {
     // console.log("payload", payload);
@@ -10,6 +13,8 @@ export const registerUser = async (payload) => {
     const addUser = await UserCollection.create({...payload, password: encryptedPasssword});
     return addUser;
 };
+
+
 
 
 export const loginUser = async (payload) => {
@@ -35,5 +40,22 @@ export const loginUser = async (payload) => {
     throw createHttpError(401, 'Unauthorized');
   }
 
-  return isPasssword;
+await SessionsCollection.deleteOne({ userId: loginUser._id });
+
+  const accessToken = randomBytes(30).toString('base64');
+  const refreshToken = randomBytes(30).toString('base64');
+
+
+  return await SessionsCollection.create({
+    userId: loginUser._id,
+    accessToken,
+    refreshToken,
+    accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
+    refreshTokenValidUntil: new Date(Date.now() + ONE_DAY),
+  });
+};
+
+
+export const logoutUser = async (sessionId) => {
+  await SessionsCollection.deleteOne({ _id: sessionId });
 };

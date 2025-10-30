@@ -10,9 +10,11 @@ export const registerUserSchema = Joi.object({
     .messages({ 'any.required': `необхідно вказати ім'я` }),
   email: Joi.string()
     .email()
+    .trim()
     .required()
     .messages({ 'any.required': `необхідно вказати email` }),
   password: Joi.string()
+    .trim()
     .required()
     .messages({ 'any.required': `необхідно створити пароль` }),
 });
@@ -26,3 +28,5 @@ export const loginUserSchema = Joi.object({
     .required()
     .messages({ 'any.required': `необхідно створити пароль` }),
 });
+
+
