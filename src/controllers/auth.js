@@ -43,7 +43,7 @@ res.cookie('sessionId', session._id, {
 
 
 export const logoutUserController = async (req, res) => {
-  console.log('req', req.body);
+  // console.log('req', req.body);
   if (req.body.sessionId) {
     await logoutUser(req.body.sessionId);
   };
