@@ -35,6 +35,7 @@ res.cookie('sessionId', session._id, {
       name: user.name,
       email: user.email,
       userId: user._id,
+      sessionId: session._id,
       accessToken: session.accessToken,
     },
   });
