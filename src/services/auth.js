@@ -8,19 +8,23 @@ import { FIFTEEN_MINUTES, ONE_DAY } from '../constants/index.js';
 
 export const registerUser = async (payload) => {
     // console.log("payload", payload);
-
     const encryptedPasssword = await bcrypt.hash(payload.password, 10);
     const addUser = await UserCollection.create({...payload, password: encryptedPasssword});
     return addUser;
 };
 
 
+export const userDataController = async (payload) => {
+  // console.log("payload", payload);
+  const dataUser = await UserCollection.findOne({ _id: payload._id });
+  // console.log('dataUser', dataUser);
+  return dataUser;
+};
+
 
 
 export const loginUser = async (payload) => {
-
-  // console.log('payload', payload.email);
-
+// console.log('payload', payload.email);
   const loginUser = await UserCollection.findOne({ email: payload.email });
   if (!loginUser) {
     throw createHttpError(401, 'User not found');
