@@ -32,6 +32,7 @@ res.cookie('sessionId', session._id, {
     status: 200,
     message: 'Successfully logged in an user!',
     data: {
+      role: user.role,
       name: user.name,
       email: user.email,
       userId: user._id,
