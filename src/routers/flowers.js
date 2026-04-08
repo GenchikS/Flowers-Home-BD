@@ -8,7 +8,7 @@ const routers = Router();
 
 routers.get('/', flowersControllers.getFlowersController);
 routers.post(
-  '/chrysanthemums',
+  '/flowers/chrysanthemums/add',
   ctrlWrapper(flowersControllers.createFlowerController),
 );
 

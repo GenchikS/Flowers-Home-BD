@@ -64,7 +64,9 @@ const flowersQuerySize =
 // 31. Наступне в файлі server.js
 
 export const createFlower = async (payload) => {
-  // console.log('payload', payload.flower);
+  console.log('payload flower', payload.flower);
+  console.log('payload', payload);
+
 
   let Collection;
 

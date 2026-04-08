@@ -24,9 +24,9 @@ const flowerSchema = new Schema(
       required: true,
     },
 
-      code: {
-        type: Number,
-        required: true,
+    code: {
+      type: Number,
+      required: true,
     },
     // 41.9
     photo: {
