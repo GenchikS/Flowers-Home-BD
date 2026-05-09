@@ -7,6 +7,7 @@ import { upload } from "../middlwares/multer.js";
 const routers = Router();
 
 routers.get('/', flowersControllers.getFlowersController);
+
 routers.post(
   '/admin/flowers/chrysanthemums/add',
   ctrlWrapper(flowersControllers.createFlowerController),
@@ -14,7 +15,7 @@ routers.post(
 
 // 41.5 Додавання до завантаження масиву фото (до 3 шт) (upload.array('photos', 10))
 routers.patch(
-  '/chrysanthemums/photo/:id',
+  '/admin/flowers/chrysanthemums/photo/:id',
   upload.single('photo'),
   ctrlWrapper(flowersControllers.patchFlowerController),
 );
