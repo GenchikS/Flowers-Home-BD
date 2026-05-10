@@ -14,7 +14,7 @@ routers.post(
 );
 
 // 41.5 Додавання до завантаження масиву фото (до 3 шт) (upload.array('photos', 10))
-routers.patch(
+routers.post(
   '/admin/flowers/chrysanthemums/photo/:id',
   upload.single('photo'),
   ctrlWrapper(flowersControllers.patchFlowerController),
