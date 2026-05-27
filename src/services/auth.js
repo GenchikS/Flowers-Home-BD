@@ -21,8 +21,6 @@ export const userDataController = async (payload) => {
   return dataUser;
 };
 
-
-
 export const loginUser = async (payload) => {
 // console.log('payload', payload.email);
   const loginUser = await UserCollection.findOne({ email: payload.email });
@@ -58,6 +56,9 @@ await SessionsCollection.deleteOne({ userId: loginUser._id });
     refreshTokenValidUntil: new Date(Date.now() + ONE_DAY),
   });
 };
+
+
+
 
 
 export const logoutUser = async (sessionId) => {

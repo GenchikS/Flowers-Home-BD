@@ -20,6 +20,7 @@ const userSchema = new Schema(
       default: "user",
       required: false,
     },
+    
   },
   { timestamps: true, versionKey: false },
 );
