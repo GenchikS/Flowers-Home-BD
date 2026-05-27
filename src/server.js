@@ -22,6 +22,8 @@ import cookieParser from 'cookie-parser';
 export const startServer = () => {
   const app = express();
 
+ app.set('trust proxy', true); // 
+
   // 12. Вбудована мідлвара для обробки парсингу JSON данних
   app.use(express.json());
 

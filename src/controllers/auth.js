@@ -51,7 +51,7 @@ export const loginUserController = async (req, res) => {
   const user = await userDataController(session.userId);
   // console.log('user', user);
 
-  const rawIp = req;
+  const rawIp = req.ip;
 
   const rawUserAgent = req.get('User-Agent');
   // console.log('rawUserAgent:', rawUserAgent);
@@ -60,9 +60,9 @@ export const loginUserController = async (req, res) => {
   // console.log('Parser ua:', ua);
 
   // const ip = '162.120.188.197';
-  const ip = '109.87.51.166';
+  // const ip = '109.87.51.166';
 
-  const geo = geoip.lookup(ip);
+  const geo = geoip.lookup(rawIp);
 
   await HistoryDataCollection.create({
     userId: session.userId,
