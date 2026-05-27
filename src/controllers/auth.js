@@ -51,6 +51,7 @@ export const loginUserController = async (req, res) => {
   const user = await userDataController(session.userId);
   // console.log('user', user);
 
+  // доступ до ip адрес
   const rawIp = req.ip;
 
   const rawUserAgent = req.get('User-Agent');
@@ -59,17 +60,14 @@ export const loginUserController = async (req, res) => {
   const ua = UAParser(rawUserAgent);
   // console.log('Parser ua:', ua);
 
-  // const ip = '162.120.188.197';
-  // const ip = '109.87.51.166';
-
+// доступ до геолокації
   const geo = geoip.lookup(rawIp);
   console.log('XXXXXXXX_geo:', geo);
-
+// створення сесії історії локацій та ip
   await HistoryDataCollection.create({
     userId: session.userId,
     // userNickname: updatedUser.userNickname,
     ip: rawIp,
-    // range: geo?.range || [],
     ll: geo?.range || [],
     country: geo?.country || 'Unknown',
     city: geo?.city || 'Unknown',
@@ -78,6 +76,7 @@ export const loginUserController = async (req, res) => {
     os: ua.os.name || 'Unknown',
     browser: ua.browser.name || 'Unknown',
   });
+
 
   res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,

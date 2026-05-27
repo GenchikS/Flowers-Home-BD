@@ -22,7 +22,7 @@ import cookieParser from 'cookie-parser';
 export const startServer = () => {
   const app = express();
 
- app.set('trust proxy', true); // 
+ app.set('trust proxy', true); // Необхідно для доступу до ip адрес (controller/auth.js)
 
   // 12. Вбудована мідлвара для обробки парсингу JSON данних
   app.use(express.json());
