@@ -51,7 +51,7 @@ export const loginUserController = async (req, res) => {
   const user = await userDataController(session.userId);
   // console.log('user', user);
 
-  const rawIp = req.ip;
+  const rawIp = req;
 
   const rawUserAgent = req.get('User-Agent');
   // console.log('rawUserAgent:', rawUserAgent);
