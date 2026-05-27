@@ -63,12 +63,13 @@ export const loginUserController = async (req, res) => {
   // const ip = '109.87.51.166';
 
   const geo = geoip.lookup(rawIp);
+  console.log('XXXXXXXX_geo:', geo);
 
   await HistoryDataCollection.create({
     userId: session.userId,
     // userNickname: updatedUser.userNickname,
     ip: rawIp,
-    range: geo?.range || [],
+    // range: geo?.range || [],
     ll: geo?.range || [],
     country: geo?.country || 'Unknown',
     city: geo?.city || 'Unknown',
