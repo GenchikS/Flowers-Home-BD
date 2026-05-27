@@ -59,7 +59,9 @@ export const loginUserController = async (req, res) => {
   const ua = UAParser(rawUserAgent);
   // console.log('Parser ua:', ua);
 
-  const ip = '162.120.188.197';
+  // const ip = '162.120.188.197';
+  const ip = '109.87.51.166';
+
   const geo = geoip.lookup(ip);
 
   await HistoryDataCollection.create({
