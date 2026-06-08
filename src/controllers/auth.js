@@ -1,9 +1,9 @@
 import { ONE_DAY } from "../constants/index.js";
-import { HistoryDataCollection } from "../db/models/historyData.js";
+// import { HistoryDataCollection } from "../db/models/historyData.js";
 import { loginUser, logoutUser, registerUser, userDataController } from "../services/auth.js";
 
-import geoip from 'geoip-lite';
-import * as parser from 'ua-parser-js';
+// import geoip from 'geoip-lite';
+// import * as parser from 'ua-parser-js';
 
 
 export const createUserController = async (req, res) => {
@@ -51,31 +51,31 @@ export const loginUserController = async (req, res) => {
   const user = await userDataController(session.userId);
   // console.log('user', user);
 
-  // доступ до ip адрес
-  const rawIp = req.ip;
+  // // доступ до ip адрес
+  // const rawIp = req.ip;
 
-  const rawUserAgent = req.get('User-Agent');
-  // console.log('rawUserAgent:', rawUserAgent);
-  const { UAParser } = parser;
-  const ua = UAParser(rawUserAgent);
-  // console.log('Parser ua:', ua);
+  // const rawUserAgent = req.get('User-Agent');
+  // // console.log('rawUserAgent:', rawUserAgent);
+  // const { UAParser } = parser;
+  // const ua = UAParser(rawUserAgent);
+  // // console.log('Parser ua:', ua);
 
-// доступ до геолокації
-  const geo = geoip.lookup(rawIp);
-  console.log('XXXXXXXX_geo:', geo);
-// створення сесії історії локацій та ip
-  await HistoryDataCollection.create({
-    userId: session.userId,
-    // userNickname: updatedUser.userNickname,
-    ip: rawIp,
-    ll: geo?.range || [],
-    country: geo?.country || 'Unknown',
-    city: geo?.city || 'Unknown',
-    area: geo?.area || 'Unknown',
-    deviceType: ua.device.type || 'Unknown',
-    os: ua.os.name || 'Unknown',
-    browser: ua.browser.name || 'Unknown',
-  });
+// // доступ до геолокації
+//   const geo = geoip.lookup(rawIp);
+//   console.log('XXXXXXXX_geo:', geo);
+// // створення сесії історії локацій та ip
+//   await HistoryDataCollection.create({
+//     userId: session.userId,
+//     // userNickname: updatedUser.userNickname,
+//     ip: rawIp,
+//     ll: geo?.range || [],
+//     country: geo?.country || 'Unknown',
+//     city: geo?.city || 'Unknown',
+//     area: geo?.area || 'Unknown',
+//     deviceType: ua.device.type || 'Unknown',
+//     os: ua.os.name || 'Unknown',
+//     browser: ua.browser.name || 'Unknown',
+//   });
 
 
   res.cookie('refreshToken', session.refreshToken, {
