@@ -52,7 +52,7 @@ export const patchFlowerController = async (req, res, next) => {
 
   // const userId = req.user.userId;
   const photo = req.file;
-  // console.log(`photo`, photo);
+  console.log(`photo`, photo);
 
   let photoUrl = null; //  пуста
 
