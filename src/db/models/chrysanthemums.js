@@ -31,11 +31,11 @@ const flowerSchema = new Schema(
     // 41.9
     photo: {
       type: String,
-      required: true,
+      required: false,
     },
     photoWeb: {
       type: String,
-      required: true,
+      required: false,
     },
     availability: {
       type: String,
