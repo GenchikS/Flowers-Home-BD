@@ -54,33 +54,33 @@ export const patchFlowerController = async (req, res, next) => {
   const photo = req.file;
   console.log(`photo`, photo);
 
-  let photoUrl = null; //  пуста
+  // let photoUrl = null; //  пуста
 
-  if (photo) {
-    // console.log(`req.file`, req.files);
-    if (enableCloudnary === 'true') {
-      // console.log(`enableCloudnary`, enableCloudnary);
-      photoUrl = await saveFileToCloudinary(photo, 'flowershome/photo');
-    } else {
-      photoUrl = await saveFileToUploadDir(req.file); //  якщо приходить файл, то передаємо для переміщення
-      // photoUrl = path.join('uploads', req.file.filename); //  передаємо відносний шлях в корінь проєкту в папку uploads (на випадок зміни шляху). Папку uploads не вказувати
-    }
-}
+//   if (photo) {
+//     // console.log(`req.file`, req.files);
+//     if (enableCloudnary === 'true') {
+//       // console.log(`enableCloudnary`, enableCloudnary);
+//       photoUrl = await saveFileToCloudinary(photo, 'flowershome/photo');
+//     } else {
+//       photoUrl = await saveFileToUploadDir(req.file); //  якщо приходить файл, то передаємо для переміщення
+//       // photoUrl = path.join('uploads', req.file.filename); //  передаємо відносний шлях в корінь проєкту в папку uploads (на випадок зміни шляху). Папку uploads не вказувати
+//     }
+// }
 
-  // const body = req.body;
-  // console.log(`body`, body);
-  const data = await patchFlower(id, photoUrl, { ...req.body });
-  // console.log(`data`, data);
-  // console.log(`photo`, photo);
+  // // const body = req.body;
+  // // console.log(`body`, body);
+  // const data = await patchFlower(id, photoUrl, { ...req.body });
+  // // console.log(`data`, data);
+  // // console.log(`photo`, photo);
 
-  if (!data) {
-    throw createHttpError(404, `Not found`);
-  }
-  res.json({
-    status: 200,
-    message: `Successfully patched a flower!`,
-    data: data,
-  });
+  // if (!data) {
+  //   throw createHttpError(404, `Not found`);
+  // }
+  // res.json({
+  //   status: 200,
+  //   message: `Successfully patched a flower!`,
+  //   data: data,
+  // });
 };
 
 export const patchFlowerWebController = async (req, res, next) => {
