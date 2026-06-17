@@ -2,27 +2,24 @@ import multer from 'multer';
 import { TEMP_UPLOAD_DIR } from '../constants/index.js';
 
 // 42.2
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, TEMP_UPLOAD_DIR);
-//   },
-//   filename: function (req, file, cb) {
-//     const uniqueSuffix = Date.now();
-//     cb(null, `${uniqueSuffix}_${file.originalname}`);
-//   },
-// });
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, TEMP_UPLOAD_DIR);
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now();
+    cb(null, `${uniqueSuffix}_${file.originalname}`);
+  },
+});
 
-// export const upload = multer({ storage: multer.memoryStorage() });
+export const upload = multer({storage});
 
 // 41.1 Попереднє в файлі constants.index.js
 // 41.3 Наступне в файлі utils/createDirIfNotExist.js
 
-// const upload = multer({ storage: multer.memoryStorage() });
-// оставить upload_stream + file.buffer
-// убрать unlink
 
-const storage = multer.memoryStorage();
+// const storage = multer.memoryStorage();
 
-export const upload = multer({
-  storage: storage,
-});
+// export const upload = multer({
+//   storage: storage,
+// });
