@@ -48,8 +48,6 @@ export const createFlowerController = async (req, res) => {
 
 export const patchFlowerController = async (req, res, next) => {
   const { id } = req.params;
-  console.log(`id`, id);
-  // const userId = req.user.userId;
   const photo = req.file;
   // console.log(`photo`, photo);
 
