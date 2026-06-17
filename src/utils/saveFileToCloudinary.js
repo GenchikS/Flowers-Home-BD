@@ -22,7 +22,7 @@ export const saveFileToCloudinary = async (file, folder) => {
   try {
   const response = await cloudinary.uploader.upload(file.path, {folder}); // завантаження файлів в cloudnary
   // console.log('response', response.url);  //  інформація про завантажений файл
-    return response.url;
+    return response.secure_url;
   }
   catch(error) {
     // throw error;
