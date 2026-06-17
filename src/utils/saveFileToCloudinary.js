@@ -33,21 +33,3 @@ export const saveFileToCloudinary = async (file, folder) => {
     await unlink(file.path); // видалення файлу temp
   }
 };
-
-
-// export const saveFileToCloudinary = async (file, folder) => {
-//   try {
-//     const result = await new Promise((resolve, reject) => {
-//       cloudinary.uploader
-//         .upload_stream({ folder }, (err, result) => {
-//           if (err) return reject(err);
-//           resolve(result);
-//         })
-//         .end(file.buffer);
-//     });
-
-//     return result.url;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };

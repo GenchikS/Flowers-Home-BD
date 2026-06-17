@@ -21,7 +21,7 @@ routers.patch(
 );
 
 
-routers.post(
+routers.patch(
   '/admin/flowers/chrysanthemums/photoWeb/:id',
   upload.single('photoWeb'),
   ctrlWrapper(flowersControllers.patchFlowerWebController),

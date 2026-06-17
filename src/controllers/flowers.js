@@ -65,8 +65,7 @@ export const patchFlowerController = async (req, res, next) => {
       // photoUrl = path.join('uploads', req.file.filename); //  передаємо відносний шлях в корінь проєкту в папку uploads (на випадок зміни шляху). Папку uploads не вказувати
     }
 }
-  // // const body = req.body;
-  // // console.log(`body`, body);
+
   const data = await patchFlower(id, photoUrl, { ...req.body });
   // console.log("data", data);
 
@@ -81,10 +80,8 @@ export const patchFlowerController = async (req, res, next) => {
 };
 
 
-export const postFlowerWebController = async (req, res, next) => {
+export const patchFlowerWebController = async (req, res, next) => {
   const { id } = req.params;
-  // console.log(`id`, id);
-  // const userId = req.user.userId;
   const photoWeb = req.file;
   // console.log(`photoWeb`, photoWeb);
 
@@ -93,18 +90,16 @@ export const postFlowerWebController = async (req, res, next) => {
   if (photoWeb) {
     // console.log(`req.file`, req.file);
     if (enableCloudnary === 'true') {
-      // console.log(`photoWeb 3`, photoWeb);
       //    // console.log(`enableCloudnary`, enableCloudnary);
       photoUrl = await saveFileToCloudinary(photoWeb, 'flowershome/photoWeb');
       // console.log("photoUrl", photoUrl);
     } else {
       // console.log('photo else', photo);
-      photoUrl = await saveFileToUploadDir(req.file); //  якщо приходить файл, то передаємо для переміщення
+      photoUrl = await saveFileToUploadDir(photoWeb); //  якщо приходить файл, то передаємо для переміщення
       // photoUrl = path.join('uploads', req.file.filename); //  передаємо відносний шлях в корінь проєкту в папку uploads (на випадок зміни шляху). Папку uploads не вказувати
     }
   }
-  // // const body = req.body;
-  // // console.log(`body`, body);
+
   const data = await patchWebFlower(id, photoUrl, { ...req.body });
   // console.log("data", data);
 
@@ -117,7 +112,6 @@ export const postFlowerWebController = async (req, res, next) => {
     data: data,
   });
 };
-
 
 
 // 41.5 Попереднє в файлі routers/flowers.js
