@@ -14,17 +14,17 @@ routers.post(
 );
 
 // 41.5 Додавання до завантаження масиву фото (до 3 шт) (upload.array('photos', 10))
-routers.post(
+routers.patch(
   '/admin/flowers/chrysanthemums/photo/:id',
   upload.single("photo"),
-  ctrlWrapper(flowersControllers.postFlowerController),
+  ctrlWrapper(flowersControllers.patchFlowerController),
 );
 
 
 routers.post(
   '/admin/flowers/chrysanthemums/photoWeb/:id',
   upload.single('photoWeb'),
-  ctrlWrapper(flowersControllers.postFlowerWebController),
+  ctrlWrapper(flowersControllers.patchFlowerWebController),
 );
 
 export default routers;
