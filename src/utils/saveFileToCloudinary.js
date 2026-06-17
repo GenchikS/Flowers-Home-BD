@@ -20,8 +20,14 @@ export const saveFileToCloudinary = async (file, folder) => {
   // console.log('folder', folder);
 
   try {
-  const response = await cloudinary.uploader.upload(file.path, {folder}); // завантаження файлів в cloudnary
-  // console.log('response', response.url);  //  інформація про завантажений файл
+  // const response = await cloudinary.uploader.upload(file.path, {folder}); // завантаження файлів в cloudnary
+    // console.log('response', response.url);  //  інформація про завантажений файл
+    const response = await cloudinary.uploader
+      .upload_stream({ folder }, (err, result) => {
+        if (err) console.log(err);
+        else console.log(result.url);
+      })
+      .end(file.buffer);
     return response.url;
   }
   catch(error) {
@@ -31,3 +37,6 @@ export const saveFileToCloudinary = async (file, folder) => {
     await unlink(file.path); // видалення файлу temp
   }
 };
+
+
+
