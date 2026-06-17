@@ -59,7 +59,7 @@ export const postFlowerController = async (req, res, next) => {
     // console.log(`req.file`, req.file);
     if (enableCloudnary === 'true') {
 //    // console.log(`enableCloudnary`, enableCloudnary);
-      photoUrl = await saveFileToCloudinary(photo, 'flowershome/photo');
+      photoUrl = await saveFileToCloudinary(photo, 'photo');
       // console.log("photoUrl", photoUrl);
   } else {
     // console.log('photo else', photo);
