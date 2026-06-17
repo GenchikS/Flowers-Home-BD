@@ -57,7 +57,7 @@ export const patchFlowerController = async (req, res, next) => {
     // console.log(`req.file`, req.file);
     if (enableCloudnary === 'true') {
       //    // console.log(`enableCloudnary`, enableCloudnary);
-      photoUrl = await saveFileToCloudinary(req.file, 'flowershome/photo');
+      photoUrl = await saveFileToCloudinary(req.file);
       // console.log("photoUrl", photoUrl);
     } else {
       // console.log('photo else', photo);
