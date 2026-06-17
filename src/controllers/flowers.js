@@ -46,69 +46,31 @@ export const createFlowerController = async (req, res) => {
 
 
 
-export const patchFlowerController = async (req, res, next) => {
+export const postFlowerController = async (req, res, next) => {
   const { id } = req.params;
-  // console.log(`id`, id);
-
+  console.log(`id`, id);
   // const userId = req.user.userId;
   const photo = req.file;
-  console.log(`photo`, photo);
-
-  // let photoUrl = null; //  пуста
-
-//   if (photo) {
-//     // console.log(`req.file`, req.files);
-//     if (enableCloudnary === 'true') {
-//       // console.log(`enableCloudnary`, enableCloudnary);
-//       photoUrl = await saveFileToCloudinary(photo, 'flowershome/photo');
-//     } else {
-//       photoUrl = await saveFileToUploadDir(req.file); //  якщо приходить файл, то передаємо для переміщення
-//       // photoUrl = path.join('uploads', req.file.filename); //  передаємо відносний шлях в корінь проєкту в папку uploads (на випадок зміни шляху). Папку uploads не вказувати
-//     }
-// }
-
-  // // const body = req.body;
-  // // console.log(`body`, body);
-  // const data = await patchFlower(id, photoUrl, { ...req.body });
-  // // console.log(`data`, data);
-  // // console.log(`photo`, photo);
-
-  // if (!data) {
-  //   throw createHttpError(404, `Not found`);
-  // }
-  // res.json({
-  //   status: 200,
-  //   message: `Successfully patched a flower!`,
-  //   data: data,
-  // });
-};
-
-export const patchFlowerWebController = async (req, res, next) => {
-  const { id } = req.params;
-  // console.log(`id`, id);
-
-  // const userId = req.user.userId;
-  const photoWeb = req.file;
   // console.log(`photo`, photo);
 
-  let photoWebUrl = null; //  пуста
+  let photoUrl = null; //  пуста
 
-  if (photoWeb) {
-    // console.log(`req.file`, req.files);
+  if (photo) {
+    // console.log(`req.file`, req.file);
     if (enableCloudnary === 'true') {
-      // console.log(`enableCloudnary`, enableCloudnary);
-      photoWebUrl = await saveFileToCloudinary(photoWeb, 'flowershome/photoWeb');
-    } else {
-      photoWebUrl = await saveFileToUploadDir(req.file); //  якщо приходить файл, то передаємо для переміщення
+//    // console.log(`enableCloudnary`, enableCloudnary);
+      photoUrl = await saveFileToCloudinary(photo, 'flowershome/photo');
+      // console.log("photoUrl", photoUrl);
+  } else {
+    // console.log('photo else', photo);
+      photoUrl = await saveFileToUploadDir(req.file); //  якщо приходить файл, то передаємо для переміщення
       // photoUrl = path.join('uploads', req.file.filename); //  передаємо відносний шлях в корінь проєкту в папку uploads (на випадок зміни шляху). Папку uploads не вказувати
     }
-  }
-
-  // const body = req.body;
-  // console.log(`body`, body);
-  const data = await patchWebFlower(id, photoWebUrl, { ...req.body });
-  // console.log(`data`, data);
-  // console.log(`photo`, photo);
+}
+  // // const body = req.body;
+  // // console.log(`body`, body);
+  const data = await patchFlower(id, photoUrl, { ...req.body });
+  // console.log("data", data);
 
   if (!data) {
     throw createHttpError(404, `Not found`);
@@ -120,6 +82,43 @@ export const patchFlowerWebController = async (req, res, next) => {
   });
 };
 
+
+export const postFlowerWebController = async (req, res, next) => {
+  const { id } = req.params;
+  // console.log(`id`, id);
+  // const userId = req.user.userId;
+  const photoWeb = req.file;
+  // console.log(`photoWeb`, photoWeb);
+
+  let photoUrl = null; //  пуста
+
+  if (photoWeb) {
+    // console.log(`req.file`, req.file);
+    if (enableCloudnary === 'true') {
+      // console.log(`photoWeb 3`, photoWeb);
+      //    // console.log(`enableCloudnary`, enableCloudnary);
+      photoUrl = await saveFileToCloudinary(photoWeb, 'flowershome/photoWeb');
+      // console.log("photoUrl", photoUrl);
+    } else {
+      // console.log('photo else', photo);
+      photoUrl = await saveFileToUploadDir(req.file); //  якщо приходить файл, то передаємо для переміщення
+      // photoUrl = path.join('uploads', req.file.filename); //  передаємо відносний шлях в корінь проєкту в папку uploads (на випадок зміни шляху). Папку uploads не вказувати
+    }
+  }
+  // // const body = req.body;
+  // // console.log(`body`, body);
+  const data = await patchWebFlower(id, photoUrl, { ...req.body });
+  // console.log("data", data);
+
+  if (!data) {
+    throw createHttpError(404, `Not found`);
+  }
+  res.json({
+    status: 200,
+    message: `Successfully patched a flower!`,
+    data: data,
+  });
+};
 
 
 
