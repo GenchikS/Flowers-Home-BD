@@ -48,23 +48,23 @@ export const createFlowerController = async (req, res) => {
 
 export const patchFlowerController = async (req, res, next) => {
   const { id } = req.params;
-  // const photo = req.file;
+  const photo = req.file;
   // console.log(`photo`, photo);
 
   let photoUrl = null; //  пуста
 
-  if (req.file) {
+  if (photo) {
     // console.log(`req.file`, req.file);
     if (enableCloudnary === 'true') {
-      //    // console.log(`enableCloudnary`, enableCloudnary);
-      photoUrl = await saveFileToCloudinary(req.file);
+//    // console.log(`enableCloudnary`, enableCloudnary);
+      photoUrl = await saveFileToCloudinary(photo, 'flowershome/photo');
       // console.log("photoUrl", photoUrl);
-    } else {
-      // console.log('photo else', photo);
-      photoUrl = await saveFileToUploadDir(req.file); //  якщо приходить файл, то передаємо для переміщення
+  } else {
+    // console.log('photo else', photo);
+      photoUrl = await saveFileToUploadDir(photo); //  якщо приходить файл, то передаємо для переміщення
       // photoUrl = path.join('uploads', req.file.filename); //  передаємо відносний шлях в корінь проєкту в папку uploads (на випадок зміни шляху). Папку uploads не вказувати
     }
-  }
+}
   // // const body = req.body;
   // // console.log(`body`, body);
   const data = await patchFlower(id, photoUrl, { ...req.body });
