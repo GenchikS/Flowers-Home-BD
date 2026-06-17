@@ -16,10 +16,10 @@ cloudinary.config({
 });
 
 export const saveFileToCloudinary = async (file, folder) => {
-  // console.log('file', file.path);
+  // console.log('file', file);
   // console.log('folder', {folder});
 
-  // try {
+  try {
     const response = await cloudinary.uploader.upload(file.path, {
       folder: 'photo'
     }); // завантаження файлів в cloudnary
@@ -27,13 +27,13 @@ export const saveFileToCloudinary = async (file, folder) => {
     // console.log('response.secure_url', response.secure_url); //  інформація про завантажений файл https
 
     return response.url;
-  // }
-  // catch(error) {
+  }
+  catch(error) {
     // throw error;
-  // }
-  // finally {
-    // await unlink(file.path); // видалення файлу temp
-  // }
+  }
+  finally {
+    await unlink(file.path); // видалення файлу temp
+  }
 };
 
 
