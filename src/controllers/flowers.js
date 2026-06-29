@@ -148,7 +148,7 @@ export const deleteFlowerWebController = async (req, res, next) => {
   );
   // console.log('deleteCloudinary', deleteCloudinary);
 
-  const data = await deleteFlower(req.query);
+  const data = await deleteFlower(flower);
   // console.log('data', data);
   res.json({
       status: 200,
