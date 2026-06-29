@@ -64,14 +64,6 @@ const flowersQuerySize =
 // 29. Попереднє в файлі models/flower.js (модель схеми flower)
 // 31. Наступне в файлі server.js
 
-export const getIdFlowers = async ({code }) => {
-  const sourceFlower = await ChrysanthemumsCollection.findOne({code: code});
-  return sourceFlower;
-};
-
-
-
-
 export const createFlower = async (payload) => {
   // console.log('payload flower', payload.flower);
   // console.log('payload', payload);
@@ -115,13 +107,13 @@ export const patchWebFlower = async (id, photoWebUrl, body) => {
 };
 
 
-export const findByIdFlower = async (id) => {
-  const findFlower = await ChrysanthemumsCollection.findById(id);
+export const findByIdFlower = async ({code}) => {
+  const findFlower = await ChrysanthemumsCollection.findOne({ code: code });
   return findFlower;
 };
 
 
-export const deleteFlower = async (id) => {
+export const deleteFlower = async ({id}) => {
   try {
     const deleteFlower = await ChrysanthemumsCollection.findByIdAndDelete(id);
     return deleteFlower;

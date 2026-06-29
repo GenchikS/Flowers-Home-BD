@@ -7,10 +7,10 @@ import { upload } from "../middlwares/multer.js";
 const routers = Router();
 
 routers.get('/', flowersControllers.getFlowersController);
-routers.get(
-  '/admin/flowers/chrysanthemums/delete',
-  flowersControllers.getFlowersIdController,
-);
+// routers.get(
+//   '/admin/flowers/chrysanthemums/delete',
+//   flowersControllers.getFlowersIdController,
+// );
 
 routers.post(
   '/admin/flowers/chrysanthemums/add',
@@ -32,7 +32,7 @@ routers.patch(
 );
 
 routers.delete(
-  '/admin/flowers/flowers/chrysanthemums/delete/:id',
+  '/admin/flowers/flowers/chrysanthemums/delete/',
   ctrlWrapper(flowersControllers.deleteFlowerWebController),
 );
 

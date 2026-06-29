@@ -6,7 +6,6 @@ import {
   patchWebFlower,
   deleteFlower,
   findByIdFlower,
-  getIdFlowers,
 } from '../services/flowers.js';
 import { saveFileToUploadDir } from "../utils/saveFileToUploadDir.js";
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
@@ -37,19 +36,6 @@ try {
 // 36. Попереднє в файлі routers/flowers.js
 // 39. Наступне в файлі controllers/flowers.js
 
-export const getFlowersIdController = async (req, res) => {
-  // const { id } = req.params;
-  try {
-    const flowersId = await getIdFlowers(req.query);
-    // console.log(`flowersId`, flowersId);
-    res.status(200).json({
-      data: flowersId,
-    });
-  } catch (error) {
-    errorHandler;
-  }
-};
-
 export const createFlowerController = async (req, res) => {
   const addFlower = await createFlower(req.body);
   res.status(201).json({
@@ -58,7 +44,6 @@ export const createFlowerController = async (req, res) => {
       data: addFlower,
     });
 };
-
 
 
 export const patchFlowerController = async (req, res, next) => {
@@ -136,24 +121,18 @@ export const patchFlowerWebController = async (req, res, next) => {
 // 41.11 Наступне в файлі server.js
 
 
-
-
 // ф-ція витягування public_id зі шляху в cloudinary
 
 function getPublicId(url) {
   const parts = url.split('/upload/')[1];
-
   const withoutVersion = parts.replace(/^v\d+\//, '');
-
   return withoutVersion.substring(0, withoutVersion.lastIndexOf('.'));
 }
 
 
 export const deleteFlowerWebController = async (req, res, next) => {
-  const { id } = req.params;
-  // console.log('id', id);
 
-  const flower = await findByIdFlower(id);
+  const flower = await findByIdFlower(req.query);
   // console.log('flower', flower);
 
   const public_id_photo = getPublicId(flower.photo);
@@ -169,7 +148,7 @@ export const deleteFlowerWebController = async (req, res, next) => {
   );
   // console.log('deleteCloudinary', deleteCloudinary);
 
-  const data = await deleteFlower(id);
+  const data = await deleteFlower(req.query);
   // console.log('data', data);
   res.json({
       status: 200,
