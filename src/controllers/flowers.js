@@ -38,9 +38,9 @@ try {
 // 39. Наступне в файлі controllers/flowers.js
 
 export const getFlowersIdController = async (req, res) => {
-  const { id } = req.params;
+  // const { id } = req.params;
   try {
-    const flowersId = await getIdFlowers(id);
+    const flowersId = await getIdFlowers(req.query);
     // console.log(`flowersId`, flowersId);
     res.status(200).json({
       data: flowersId,
