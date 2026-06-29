@@ -64,6 +64,15 @@ const flowersQuerySize =
 // 29. Попереднє в файлі models/flower.js (модель схеми flower)
 // 31. Наступне в файлі server.js
 
+export const getIdFlowers = async (id) => {
+  const response = await ChrysanthemumsCollection.findById(id);
+  // console.log('response', response);
+  return response;
+};
+
+
+
+
 export const createFlower = async (payload) => {
   // console.log('payload flower', payload.flower);
   // console.log('payload', payload);

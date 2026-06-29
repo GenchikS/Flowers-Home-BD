@@ -6,6 +6,7 @@ import {
   patchWebFlower,
   deleteFlower,
   findByIdFlower,
+  getIdFlowers,
 } from '../services/flowers.js';
 import { saveFileToUploadDir } from "../utils/saveFileToUploadDir.js";
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
@@ -35,6 +36,19 @@ try {
 
 // 36. Попереднє в файлі routers/flowers.js
 // 39. Наступне в файлі controllers/flowers.js
+
+export const getFlowersIdController = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const flowersId = await getIdFlowers(id);
+    // console.log(`flowersId`, flowersId);
+    res.status(200).json({
+      data: flowersId,
+    });
+  } catch (error) {
+    errorHandler;
+  }
+};
 
 export const createFlowerController = async (req, res) => {
   const addFlower = await createFlower(req.body);
