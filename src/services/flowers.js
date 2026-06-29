@@ -1,3 +1,4 @@
+import { tryEach } from 'async';
 import { ChrysanthemumsCollection, DaisieCollection } from '../db/models/chrysanthemums.js';
 import { calculatePaginationData } from "../utils/calculatePaginationData.js";
 
@@ -88,7 +89,7 @@ export const createFlower = async (payload) => {
 };
 
 export const patchFlower = async (id, photoUrl, body) => {
-  const padchedFlower = ChrysanthemumsCollection.findOneAndUpdate(
+  const padchedFlower = await ChrysanthemumsCollection.findOneAndUpdate(
     { _id: id },
     { ...body, photo: photoUrl },
     { new: true },
@@ -97,10 +98,27 @@ export const patchFlower = async (id, photoUrl, body) => {
 };
 
 export const patchWebFlower = async (id, photoWebUrl, body) => {
-  const padchedFlower = ChrysanthemumsCollection.findOneAndUpdate(
+  const padchedFlower = await ChrysanthemumsCollection.findOneAndUpdate(
     { _id: id },
     { ...body, photoWeb: photoWebUrl },
     { new: true },
   );
   return padchedFlower;
+};
+
+
+export const findByIdFlower = async (id) => {
+  const findFlower = await ChrysanthemumsCollection.findById(id);
+  return findFlower;
+};
+
+
+export const deleteFlower = async (id) => {
+  try {
+    const deleteFlower = await ChrysanthemumsCollection.findByIdAndDelete(id);
+    return deleteFlower;
+  } catch (error) {
+    return error;
+  }
+
 };

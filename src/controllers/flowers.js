@@ -4,13 +4,14 @@ import {
   patchFlower,
   getAllFlowers,
   patchWebFlower,
+  deleteFlower,
+  findByIdFlower,
 } from '../services/flowers.js';
 import { saveFileToUploadDir } from "../utils/saveFileToUploadDir.js";
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
-// import * as path from 'node:path';
 import { getEnvValue } from "../utils/getEnvValue.js";
 import createHttpError from "http-errors";
-// import { parsePaginationParams } from "../utils/parsePaginatiomParams.js";
+import { deleteFileToCloudinary } from "../utils/deleteFileToCloudinary.js";
 
 
 const enableCloudnary = getEnvValue('ENABLE_CLOUDNARY');
@@ -23,10 +24,10 @@ export const getFlowersController = async (req, res) => {
   // console.log('flower', req.query);
 try {
   const flowersAllProducts = await getAllFlowers(req.query);
-    // console.log(`flowersProducts`, flowersAllProducts);
-    res.status(200).json({
-      data: flowersAllProducts,
-    });
+  // console.log(`flowersAllProducts`, flowersAllProducts);
+  res.status(200).json({
+    data: flowersAllProducts,
+  });
 } catch (error) {
   errorHandler;
 }
@@ -119,3 +120,47 @@ export const patchFlowerWebController = async (req, res, next) => {
 
 // 41.9 Попереднє в файлі db/models/flowers.js
 // 41.11 Наступне в файлі server.js
+
+
+
+
+// ф-ція витягування public_id зі шляху в cloudinary
+
+function getPublicId(url) {
+  const parts = url.split('/upload/')[1];
+
+  const withoutVersion = parts.replace(/^v\d+\//, '');
+
+  return withoutVersion.substring(0, withoutVersion.lastIndexOf('.'));
+}
+
+
+export const deleteFlowerWebController = async (req, res, next) => {
+  const { id } = req.params;
+  // console.log('id', id);
+
+  const flower = await findByIdFlower(id);
+  // console.log('flower', flower);
+
+  const public_id_photo = getPublicId(flower.photo);
+  // console.log('public_id_photo', public_id_photo);
+
+  const public_id_photoWeb = getPublicId(flower.photoWeb);
+  // console.log('public_id_photoWeb', public_id_photoWeb);
+
+
+  const deleteCloudinary = await deleteFileToCloudinary(
+    public_id_photo,
+    public_id_photoWeb,
+  );
+  // console.log('deleteCloudinary', deleteCloudinary);
+
+  const data = await deleteFlower(id);
+  // console.log('data', data);
+  res.json({
+      status: 200,
+      message: `${deleteCloudinary.isPhoto}! ${deleteCloudinary.isPhotoWeb}!`,
+      data: data
+    });
+};
+

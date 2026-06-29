@@ -27,6 +27,11 @@ routers.patch(
   ctrlWrapper(flowersControllers.patchFlowerWebController),
 );
 
+routers.delete(
+  '/admin/flowers/flowers/chrysanthemums/delete/:id',
+  ctrlWrapper(flowersControllers.deleteFlowerWebController),
+);
+
 export default routers;
 
 
