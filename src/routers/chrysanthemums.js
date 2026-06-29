@@ -32,7 +32,7 @@ routers.patch(
 );
 
 routers.delete(
-  '/admin/flowers/flowers/chrysanthemums/delete/',
+  '/admin/flowers/chrysanthemums/delete/',
   ctrlWrapper(flowersControllers.deleteFlowerWebController),
 );
 
